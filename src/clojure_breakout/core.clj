@@ -15,7 +15,7 @@
 (defn draw-rect [r]
   (q/rect (:x r) (:y r) (:w r) (:h r)))
 
-(defn move-ball [{:keys [racket ball score bricks ball-dir game-over won] :as state}]
+(defn move-ball [{:keys [racket ball score bricks ball-dir] :as state}]
   (update-in state [:ball] assoc 
              :x (+ (ball :x) (* ball-speed (first ball-dir)))
              :y (+ (ball :y) (* ball-speed (second ball-dir)))))
@@ -24,7 +24,7 @@
   (cond (> (ball :y) (+ (racket :h) (racket :y))) (assoc state :status-msg "GAME OVER")
         (empty? bricks) (assoc state :status-msg "YOU WIN!" :ball-dir [0 0])
         :neither state))
-(.toString score)
+
 (defn reflect [{:keys [racket ball score bricks ball-dir] :as state}]
   (let [[dir-x dir-y] ball-dir
         ball-x (if (> dir-x 0) (+ (ball :h) (ball :x)) (ball :x))
