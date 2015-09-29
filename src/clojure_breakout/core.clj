@@ -24,7 +24,7 @@
   (cond (> (ball :y) (+ (racket :h) (racket :y))) (assoc state :status-msg "GAME OVER")
         (empty? bricks) (assoc state :status-msg "YOU WIN!" :ball-dir [0 0])
         :neither state))
-(.toString score)
+
 (defn reflect [{:keys [racket ball score bricks ball-dir] :as state}]
   (let [[dir-x dir-y] ball-dir
         ball-x (if (> dir-x 0) (+ (ball :h) (ball :x)) (ball :x))
