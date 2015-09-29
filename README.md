@@ -1,4 +1,4 @@
-# clojure-breakout
+# broken-boxes
 
 Classic breakout game made originally to practice writing Clojure.
 
