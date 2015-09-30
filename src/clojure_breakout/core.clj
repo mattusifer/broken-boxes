@@ -20,8 +20,13 @@
              :x (+ (ball :x) (* ball-speed (first ball-dir)))
              :y (+ (ball :y) (* ball-speed (second ball-dir)))))
 
-(defn game-over? [{:keys [racket ball score bricks ball-dir status-msg] :as state}] 
-  (cond (> (ball :y) (+ (racket :h) (racket :y))) (assoc state :status-msg "GAME OVER")
+(defn game-over? [{:keys [racket ball score bricks ball-dir lives status-msg] :as state}] 
+  (cond (> (ball :y) (+ (racket :h) (racket :y))) 
+        (if (< lives 0) 
+          (assoc state :status-msg "GAME OVER") 
+          (-> state 
+              (update-in [:lives] dec) 
+              (assoc :ball {:x 375 :y 640 :w 10 :h 10} :ball-dir [0.5 -0.5])))
         (empty? bricks) (assoc state :status-msg "YOU WIN!" :ball-dir [0 0])
         :neither state))
 
@@ -62,9 +67,10 @@
 
   {:racket {:x 350 :y 650 :w racket-width :h 5}
    :ball {:x 375 :y 640 :w 10 :h 10}
-   :score {:val 0 :pos [15 40]}
+   :score {:val 0 :pos [15 685]}
    :bricks level-1
    :ball-dir [0.5 -0.5]
+   :lives 3
    :status-msg ""})
 
 (defn mouse-moved [state event]
@@ -76,17 +82,21 @@
              {score :val [score-x score-y] :pos} :score
              bricks :bricks
              [ball-x ball-y] :ball-dir
+             lives :lives
              status-msg :status-msg}]
   ; setup
-  (q/fill 0xff)
-  (q/background-float 0x20)
-  (draw-rect racket)
+  (q/color-mode :hsb) 
+  (q/background-float 0 0 20) ; background
+  (q/fill 360 0 360) ; draw white
+  (draw-rect racket) 
   (draw-rect ball)
-  (q/text-num score score-x score-y)
-  (q/text status-msg 400 400)
+  (q/text status-msg 400 400) ; win/lose msg
+  (doseq [brick bricks] (draw-rect brick)) ; bricks
   
-  ;brick creation
-  (doseq [brick bricks] (draw-rect brick)))
+  (q/fill 150 200 300) ; draw blue
+  (q/text-num score score-x score-y) ; score
+  (doseq [i (range lives)]
+    (draw-rect {:x (+ (* 50 i) 840) :y 675 :w 15 :h 5}))) ; lives
 
 (defn -main [& args]
   (q/defsketch breakout
