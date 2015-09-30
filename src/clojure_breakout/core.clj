@@ -15,7 +15,7 @@
 (defn draw-rect [r]
   (q/rect (:x r) (:y r) (:w r) (:h r)))
 
-(defn move-ball [{:keys [racket ball score bricks ball-dir game-over won] :as state}]
+(defn move-ball [{:keys [racket ball score bricks ball-dir] :as state}]
   (update-in state [:ball] assoc 
              :x (+ (ball :x) (* ball-speed (first ball-dir)))
              :y (+ (ball :y) (* ball-speed (second ball-dir)))))
