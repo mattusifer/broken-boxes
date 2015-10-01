@@ -1,7 +1,6 @@
 (ns clojure-breakout.core
   (:require [quil.core :as q]
             [quil.middleware :as qm])
-  (:import [java.awt.event KeyEvent])
   (:gen-class :main true))
 
 (load "levels")
