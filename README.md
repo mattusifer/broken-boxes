@@ -1,8 +1,8 @@
 # broken-boxes
 
-Classic breakout game made originally to practice Clojure.
+![alt tag](https://raw.githubusercontent.com/mattusifer/broken-boxes/master/assets/screenshot.png)
 
-Still under development, and will eventually turn into a really out-of-control version of this game.
+Classic breakout game made originally to practice Clojure.
 
 ## Build
 - Clone the repo
