@@ -1,4 +1,4 @@
-(ns clojure-breakout.core
+(ns broken-boxes.core
   (:require [quil.core :as q]
             [quil.middleware :as qm])
   (:gen-class :main true))

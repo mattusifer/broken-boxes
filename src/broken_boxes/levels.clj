@@ -1,4 +1,4 @@
-(in-ns 'clojure-breakout.core)
+(in-ns 'broken-boxes.core)
 
 (def level-1 [{:x 20 :y 35 :w 50 :h 10}
               {:x 20 :y 50 :w 50 :h 10}
