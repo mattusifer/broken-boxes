@@ -6,7 +6,7 @@
 (load "levels")
 
 ; globals
-(def ball-speed 8)
+(def ball-speed 15)
 (def racket-speed 15)
 (def racket-width 150)
 (def screen-width 1000)
